@@ -1,9 +1,9 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import schema from '../../../graphql/schema'
+import schema_stockReq from './schema/stockReq'
 
 const router = express.Router()
 
-router.use('/', graphqlHTTP({ schema: schema, graphiql: true }))
+router.use('/stock-req', graphqlHTTP({ schema: schema_stockReq, graphiql: true }))
 
 export default router

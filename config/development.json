@@ -16,5 +16,14 @@
     "SAP_ASHOST": "erpqas.indexlivingmall.com",
     "SAP_ROUTER": "",
     "SAP_LANGUAGE": "EN"
+  },
+  "sap-dev": {
+    "user": "support",
+    "passwd": "it@7ndex",
+    "client": "900",
+    "sysnr": "00",
+    "ashost": "erpdev.indexlivingmall.com",
+    "router": "",
+    "language": "EN"
   }
 }
