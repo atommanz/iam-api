@@ -24,7 +24,6 @@ const getStockReqList = {
         const newList = []
         const outBapi = await callBapi_MD_STOCK_REQUIREMENTS_LIST_API(args.articleNo, args.siteCode)
         const promMap = outBapi.map((value,index)=>{
-            console.log(value.DELKZ)
             if(value.DELKZ === 'LA' || value.DELKZ ==='BE'){
                 newList.push(value)
             }

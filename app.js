@@ -1,8 +1,6 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import schema from './graphql/schema'
 import apiRouter from './routes/api'
-import { testConnect } from './routes/services/connectSQL'
 import { callBapi_MD_STOCK_REQUIREMENTS_LIST_API } from './routes/api/sap/service/stockRequirementsList'
 import {
     pool,
