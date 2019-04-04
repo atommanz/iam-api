@@ -57,7 +57,7 @@ const getSumBilling = {
         const promMap = outSQLbilling.map((value, index) => {
             // console.log(value)
             if (value.MCH3_CD === '24' && (value.DIST_CH_KEY === '10' || value.DIST_CH_KEY === '16')) {
-                console.log('24 in', amount, value.NET_SALES_PRICE, quantity)
+                // console.log('24 in', amount, value.NET_SALES_PRICE, quantity)
                 quantity = quantity + parseInt(value.NET_SALES_QTY)
                 amount = amount + parseFloat(value.NET_SALES_PRICE)
             }
@@ -66,7 +66,7 @@ const getSumBilling = {
                 quantity = quantity + parseInt(value.NET_SALES_QTY)
                 amount = amount + Math.round(value.NET_SALES_PRICE * 100) / 100
             }
-            console.log('dd', objOut.amount)
+            // console.log('dd', objOut.amount)
             objOut.ITEM_KEY = String(value.ITEM_KEY)
             objOut.quantity = String(quantity)
             objOut.amount = String(Math.round(amount * 100) / 100)
@@ -74,7 +74,7 @@ const getSumBilling = {
         })
         await Promise.all(promMap)
         await arr.push(objOut)
-        console.log('arr ', arr)
+        // console.log('arr ', arr)
         return arr
 
     }
