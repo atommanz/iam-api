@@ -2,6 +2,10 @@ import sql from 'mssql'
 import { pool } from '../../../../utils'
 
 const serviceGetBillingList = async (articleNo, startDate, endDate) => {
+    const NewarticleNo = (articleNo ? articleNo : '')
+    const NewstartDate = (startDate ? startDate : '')
+    const NewendDate = (endDate ? endDate : '')
+    console.log(NewarticleNo, NewstartDate, NewendDate)
     const queryStr = `SELECT TOP (1000) [ITEM_KEY]
   ,[DATE_KEY]
   ,[DIST_CH_KEY]
@@ -11,9 +15,9 @@ const serviceGetBillingList = async (articleNo, startDate, endDate) => {
   ,[NET_SALES_QTY]
   ,[CURRENCY_CD]
   ,[NET_SALES_PRICE]
-FROM [PRD_ILMDW_SYBASE].[dbo].[FCT_SVE_BLS_PERFORMANCE_DAILY]
-where ITEM_KEY = '110006018' and DATE_KEY between '20190130' and '20190228'`
-
+FROM [PRD_ILMDW_SYBASE].[dbo].[FCT_SVE_BLS_PERFORMANCE_DAILY] 
+where ITEM_KEY = '${NewarticleNo}' and DATE_KEY between '${NewstartDate}' and '${NewendDate}'`
+console.log(queryStr)
     const data = (await pool.request()
         .query(queryStr))
 
@@ -23,7 +27,7 @@ where ITEM_KEY = '110006018' and DATE_KEY between '20190130' and '20190228'`
     // .input('endDate', endDate)
     // .query('select qnumber from qbook where qdate >= @startDate AND qdate <= @endDate'))
 
-    console.log(data.recordset)
+    // console.log(data.recordset)
     return data.recordset
 }
 

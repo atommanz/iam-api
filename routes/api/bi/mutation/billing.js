@@ -6,13 +6,13 @@ import {
     GraphQLList,
     GraphQLInt
 } from 'graphql';
-import { billingType } from '../inputtype/billing'
+import { billingType, billingSumType } from '../inputtype/billing'
 const addProduct = {
     type: new GraphQLList(billingType),
     args: {
         ITEM_KEY: {
             type: GraphQLString,
-            description: "article number",
+            // description: "article number",
         },
         DATE_KEY: {
             type: GraphQLString,
@@ -49,6 +49,35 @@ const addProduct = {
 
     }
 }
+
+const addProduct2 = {
+    type: new GraphQLList(billingSumType),
+    args: {
+        ITEM_KEY: {
+            type: GraphQLString,
+        },
+        amount: {
+            type: GraphQLString,
+        },
+        quantity: {
+            type: GraphQLString,
+        },
+        cost: {
+            type: GraphQLString,
+        }
+    },
+    resolve: async function (_, args) {
+        var addPara = {
+            ITEM_KEY: '1'
+        }
+        const aa = await callBapi_MD_STOCK_REQUIREMENTS_LIST_API(args.articleNo, args.siteCode)
+
+        return aa.push(addPara)
+
+    }
+}
+
 export default {
-    addProduct
+    addProduct,
+    addProduct2
 }

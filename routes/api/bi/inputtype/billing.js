@@ -43,6 +43,30 @@ const billingType = new GraphQLObjectType({
     })
 })
 
+const billingSumType = new GraphQLObjectType({
+    name: "BillingSumType",
+    description: "out from SQL FCT_SVE_BLS_PERFORMANCE_DAILY",
+    fields: () => ({
+        ITEM_KEY: {
+            type: GraphQLString,
+            description: "article number",
+        },
+        amount: {
+            type: GraphQLString,
+            description: "date",
+        },
+        quantity: {
+            type: GraphQLString,
+            description: "channel",
+        },
+        cost: {
+            type: GraphQLString,
+            description: "channel",
+        }
+    })
+})
+
 export default {
-    billingType
+    billingType,
+    billingSumType
 }
