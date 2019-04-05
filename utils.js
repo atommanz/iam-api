@@ -2,6 +2,7 @@
 import sql from 'mssql'
 import dotenv from 'dotenv'
 import config from 'config'
+import Sequelize from 'sequelize'
 
 dotenv.config()
 
@@ -32,6 +33,23 @@ const dbconfig = {
   },
 }
 console.log(dbconfig)
+
+const defaultConfig = {
+  pool: {
+    max: 30, min: 0, acquire: 1000000, idle: 10000,
+  },
+  dialectOptions: {
+    requestTimeout: 400000,
+  },
+  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+  operatorsAliases: false,
+  logging: false,
+  timezone: '+07:00',
+}
+
+const pgconfig = config.get('pg')
+console.log('pgconfig',pgconfig)
+
 const connectionPool = new sql.ConnectionPool(dbconfig)
 
 const configMap = {}
@@ -52,6 +70,15 @@ export const getConfigMap = async (key, alias = '*', reload = false) => {
   }
   return configMap[key]
 }
+
+export const sequelizePostgres = new Sequelize(
+  pgconfig.database,
+  pgconfig.username, pgconfig.password, {
+    host: pgconfig.host,
+    dialect: 'postgres',
+    ...defaultConfig,
+  }
+)
 
 export const errorMessage = (message, status = 500, stacktrace) => {
   const err = new Error()

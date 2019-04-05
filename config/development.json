@@ -25,5 +25,11 @@
     "ashost": "erpdev.indexlivingmall.com",
     "router": "",
     "language": "EN"
+  },
+  "pg": {
+    "host": "10.10.6.121",
+    "username": "biuser",
+    "password": "biuser",
+    "database": "iamg2db"
   }
 }
