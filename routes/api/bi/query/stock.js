@@ -18,13 +18,10 @@ const getStockList = {
         },
         date: {
             type: GraphQLString
-        },
-        plantKey: {
-            type: GraphQLString
         }
     },
     resolve: async function (_, args) {
-        const outSQLbilling = await seviceGetStockList(args.articleNo, args.date, args.plantKey)
+        const outSQLbilling = await seviceGetStockList(args.articleNo, args.date)
         return outSQLbilling
 
     }
@@ -36,9 +33,6 @@ const getBranchQtyForecast = {
             type: GraphQLString
         },
         date: {
-            type: GraphQLString
-        },
-        plantKey: {
             type: GraphQLString
         }
     },

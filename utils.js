@@ -80,6 +80,15 @@ export const sequelizePostgres = new Sequelize(
   }
 )
 
+export const sequelize = new Sequelize(
+  DB_DATABASE,
+  DB_USER, DB_PASSWORD, {
+    host: DB_HOST,
+    dialect: 'mssql',
+    ...defaultConfig,
+  }
+)
+
 export const errorMessage = (message, status = 500, stacktrace) => {
   const err = new Error()
   err.message = message
