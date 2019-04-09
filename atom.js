@@ -6,7 +6,7 @@ const service = require('./routes/api/bi/service/stock')
 
 function main() {
   console.log('main work')
-  service.mainStock('110026106','20190404')
+  service.mainStock('110026106','20190407')
   // service.seviceGetStockList('110000288','20190404','1202')
     .then((xxx) => {
       console.log('main todo', xxx)
