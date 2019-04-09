@@ -49,10 +49,8 @@ const getMaterialsList = async (aritcleNo) => {
     return materialList
 }
 
-const caseZBO2 = async (articleNo, date) => {
-    const ZBO2useMat = await getMaterialsList(articleNo)
-    const ZBO1useMat = []
-    console.log(`ZBO2useMat `, ZBO2useMat)
+const getZBO1useMat = async (ZBO2useMat) => {
+    const output = []
     if (ZBO2useMat.length === 0) {
         console.log('case false ')
         return false
@@ -61,35 +59,41 @@ const caseZBO2 = async (articleNo, date) => {
         const findMatLastLv = await getMaterialsList(value.component_article_no)
         const qtyMidLv = parseInt(value.component_qty)
         if (findMatLastLv.length === 0) {
-            console.log('case 0 ', qtyMidLv, value.component_qty)
+            // console.log('case 0 ', qtyMidLv, value.component_qty)
             value.netQty = value.component_qty
-            ZBO1useMat.push(value)
+            output.push(value)
         }
         else {
             const promSubMap = findMatLastLv.map((subValue, subIndex) => {
-                console.log('case 1 ', qtyMidLv, subValue.component_qty)
+                // console.log('case 1 ', qtyMidLv, subValue.component_qty)
                 subValue.netQty = String(qtyMidLv * parseInt(subValue.component_qty))
-                ZBO1useMat.push(subValue)
+                output.push(subValue)
             })
             await Promise.all(promSubMap)
         }
     })
     await Promise.all(promMap1)
-    console.log('ZBO1useMat', ZBO1useMat)
+    console.log('ZBO1useMat', output)
+    return output
+}
 
-    const componentStock = []
+const getComponentStock = async (ZBO1useMat,date) => {
 
+    const output = []
     const promMap2 = ZBO1useMat.map(async (value1, index1) => {
+
         const tmpObj = {}
         tmpObj.articleComponentNo = value1.component_article_no
 
         const promMapBranch = branchList.map(async (valueBranch, indexBranch) => {
+
             tmpObj.stock = []
             const objStock = {}
             objStock.plant = valueBranch
 
 
             const promMapSlocKey = slocKeyList.map(async (valueSlocKey, indexSlocKey) => {
+
                 const stockList = await seviceGetStockList(value1.component_article_no, date, valueBranch, valueSlocKey)
                 if (indexSlocKey === 0) {
                     if (stockList.length > 0) {
@@ -118,23 +122,100 @@ const caseZBO2 = async (articleNo, date) => {
 
                     tmpObj.stock.push(objStock)
                 }
-
-
             })
+
             await Promise.all(promMapSlocKey)
-            // if (index1 === 0) {
-
-            //     console.log('ooobbbb', tmpObj)
-
-            // }
         })
 
         await Promise.all(promMapBranch)
-        componentStock.push(tmpObj)
+        
+        output.push(tmpObj)
 
 
     })
     await Promise.all(promMap2)
+    return output
+}
+
+const caseZBO2 = async (articleNo, date) => {
+    const ZBO2useMat = await getMaterialsList(articleNo)
+    // const ZBO1useMat = []
+    // if (ZBO2useMat.length === 0) {
+    //     console.log('case false ')
+    //     return false
+    // }
+    // const promMap1 = ZBO2useMat.map(async (value, index) => {
+    //     const findMatLastLv = await getMaterialsList(value.component_article_no)
+    //     const qtyMidLv = parseInt(value.component_qty)
+    //     if (findMatLastLv.length === 0) {
+    //         // console.log('case 0 ', qtyMidLv, value.component_qty)
+    //         value.netQty = value.component_qty
+    //         ZBO1useMat.push(value)
+    //     }
+    //     else {
+    //         const promSubMap = findMatLastLv.map((subValue, subIndex) => {
+    //             // console.log('case 1 ', qtyMidLv, subValue.component_qty)
+    //             subValue.netQty = String(qtyMidLv * parseInt(subValue.component_qty))
+    //             ZBO1useMat.push(subValue)
+    //         })
+    //         await Promise.all(promSubMap)
+    //     }
+    // })
+    // await Promise.all(promMap1)
+    // console.log('ZBO1useMat', ZBO1useMat)
+    const ZBO1useMat = await getZBO1useMat(ZBO2useMat)
+    const componentStock = await getComponentStock(ZBO1useMat,date)
+    // const componentStock = []
+
+    // const promMap2 = ZBO1useMat.map(async (value1, index1) => {
+    //     const tmpObj = {}
+    //     tmpObj.articleComponentNo = value1.component_article_no
+
+    //     const promMapBranch = branchList.map(async (valueBranch, indexBranch) => {
+    //         tmpObj.stock = []
+    //         const objStock = {}
+    //         objStock.plant = valueBranch
+
+
+    //         const promMapSlocKey = slocKeyList.map(async (valueSlocKey, indexSlocKey) => {
+    //             const stockList = await seviceGetStockList(value1.component_article_no, date, valueBranch, valueSlocKey)
+    //             if (indexSlocKey === 0) {
+    //                 if (stockList.length > 0) {
+    //                     objStock.sloc001 = stockList[0].UNITS_ON_HAND_SAP
+    //                 }
+    //                 else { objStock.sloc001 = 0 }
+    //             }
+    //             else if (indexSlocKey === 1) {
+    //                 if (stockList.length > 0) {
+    //                     objStock.sloc002 = stockList[0].UNITS_ON_HAND_SAP
+    //                 }
+    //                 else { objStock.sloc002 = 0 }
+    //             }
+    //             else if (indexSlocKey === 2) {
+    //                 if (stockList.length > 0) {
+    //                     objStock.sloc003 = stockList[0].UNITS_ON_HAND_SAP
+    //                 }
+    //                 else { objStock.sloc003 = 0 }
+    //             }
+    //             else if (indexSlocKey === 3) {
+    //                 if (stockList.length > 0) {
+    //                     objStock.sloc004 = stockList[0].UNITS_ON_HAND_SAP
+
+    //                 }
+    //                 else { objStock.sloc004 = 0 }
+
+    //                 tmpObj.stock.push(objStock)
+    //             }
+    //         })
+    //         await Promise.all(promMapSlocKey)
+    //     })
+
+    //     await Promise.all(promMapBranch)
+    //     componentStock.push(tmpObj)
+
+
+    // })
+    // await Promise.all(promMap2)
 
     fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
 
@@ -274,7 +355,7 @@ const mainStock = async (aritcleNo, date) => {
     }
     else if (articleType === 'ZBO1') {
         const output = []
-        return output
+        return articleType
     }
     else if (articleType === 'ZNM1') {
         const output = []
