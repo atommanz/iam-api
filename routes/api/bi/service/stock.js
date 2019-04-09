@@ -137,11 +137,37 @@ const getComponentStock = async (ZBO1useMat, date) => {
     return output
 }
 
-const caseZBO2 = async (articleNo, date) => {
+const caseZBO = async (articleNo, date) => {
     const ZBO2useMat = await getMaterialsList(articleNo)
     console.log('ZBO2useMat', ZBO2useMat)
     const ZBO1useMat = await getZBO1useMat(ZBO2useMat)
     console.log('ZBO1useMat', ZBO1useMat)
+    const componentStock = await getComponentStock(ZBO1useMat, date)
+
+    fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
+
+    const totalDivideQty = await findTotalStockByQty(ZBO1useMat, componentStock)
+    fs.writeFileSync("totalDivideQty.json", JSON.stringify(totalDivideQty))
+
+    const VarBeforeFindMinQty = await buildVarBeforeFindMinQty(ZBO1useMat, totalDivideQty)
+    fs.writeFileSync("VarBeforeFindMinQty.json", JSON.stringify(VarBeforeFindMinQty))
+
+    const listMinStock = await findMin(VarBeforeFindMinQty)
+    fs.writeFileSync("listMinStock.json", JSON.stringify(listMinStock))
+
+    return listMinStock
+}
+
+
+const caseZNM1 = async (articleNo, date) => {
+    const ZBO1useMat = []
+    ZBO1useMat.push({
+        article_no: articleNo,
+        component_article_no: articleNo,
+        component_qty: '1',
+        netQty: '1'
+    })
+
     const componentStock = await getComponentStock(ZBO1useMat, date)
 
     fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
@@ -253,14 +279,7 @@ function searchByPlant(nameKey, myArray) {
     }
 }
 
-const caseZBO1 = async (List) => {
-    const materialList = await getMaterialsList(articleNo)
-    return resolve(materialList)
-}
-const caseZNM1 = async () => {
 
-    return listArticle
-}
 
 const mainStock = async (aritcleNo, date) => {
     if (fs.existsSync('componentStock.json')) {
@@ -277,15 +296,15 @@ const mainStock = async (aritcleNo, date) => {
     const articleType = await getArticleType(aritcleNo)
     console.log('articleType', articleType)
     if (articleType === 'ZBO2') {
-        const output = await caseZBO2(aritcleNo, date)
+        const output = await caseZBO(aritcleNo, date)
         return output
     }
     else if (articleType === 'ZBO1') {
-        const output = await caseZBO2(aritcleNo, date)
+        const output = await caseZBO(aritcleNo, date)
         return output
     }
     else if (articleType === 'ZNM1') {
-        const output = []
+        const output = await caseZNM1(aritcleNo, date)
         return output
     }
     else {
