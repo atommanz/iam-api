@@ -7,7 +7,6 @@ import { POINT_CONVERSION_COMPRESSED, WSAESOCKTNOSUPPORT } from 'constants';
 const branchList = config.branch
 const slocKeyList = config.slocKey
 let outputTemplate = JSON.parse(JSON.stringify(config.outputStockTemplate));
-// const outputTemplate = [...config.outputStockTemplate]
 const outputCaseElse = config.outputStockCaseElse
 const getListArticleIAM = async () => {
     const query = 'select * from sap_mara order by article_no ASC LIMIT 2'
@@ -289,8 +288,6 @@ const mainStock = async (aritcleNo, date) => {
 
 
     const articleType = await getArticleType(aritcleNo)
-    console.log('outputTemplate', outputTemplate)
-    console.log('config.outputStockTemplate', config.outputStockTemplate)
 
     console.log('articleType', articleType, aritcleNo, date)
     if (articleType === 'ZBO2') {
