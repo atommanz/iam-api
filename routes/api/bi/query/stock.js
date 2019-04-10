@@ -6,8 +6,8 @@ import {
     GraphQLList,
     GraphQLInt
 } from 'graphql';
-import { stockType,  stockBranchQtyType} from '../inputtype/stock'
-import { seviceGetStockList } from '../service/stock'
+import { stockType, stockBranchQtyType } from '../inputtype/stock'
+import { seviceGetStockList, mainStock } from '../service/stock'
 
 
 const getStockList = {
@@ -37,16 +37,9 @@ const getBranchQtyForecast = {
         }
     },
     resolve: async function (_, args) {
-        const ccc = [{
-            articleNo:'1111',
-            plant:'plant',
-            sloc001:'sloc001',
-            sloc002:'sloc002',
-            sloc003:'sloc003',
-            sloc004:'sloc004'
-        }]
+        const outStockList = await mainStock(args.articleNo, args.date)
         
-        return ccc
+        return outStockList
 
     }
 }

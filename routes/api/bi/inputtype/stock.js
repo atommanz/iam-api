@@ -35,28 +35,24 @@ const stockBranchQtyType = new GraphQLObjectType({
     name: "stockBranchQtyType",
     description: "out from SQL FCT_SVE_BLS_PERFORMANCE_DAILY",
     fields: () => ({
-        articleNo: {
-            type: GraphQLString,
-            description: "article number",
-        },
         plant: {
             type: GraphQLString,
             description: "plant",
         },
         sloc001: {
-            type: GraphQLString,
+            type: GraphQLInt,
             description: "001",
         },
         sloc002: {
-            type: GraphQLString,
+            type: GraphQLInt,
             description: "002",
         },
         sloc003: {
-            type: GraphQLString,
+            type: GraphQLInt,
             description: "003",
         },
         sloc004: {
-            type: GraphQLString,
+            type: GraphQLInt,
             description: "004",
         }
     })

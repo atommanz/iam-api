@@ -43,23 +43,20 @@ const addProduct = {
 const addProduct2 = {
     type: new GraphQLList(stockBranchQtyType),
     args: {
-        articleNo: {
-            type: GraphQLString,
-        },
         plant: {
             type: GraphQLString,
         },
         sloc001: {
-            type: GraphQLString,
+            type: GraphQLInt,
         },
         sloc002: {
-            type: GraphQLString,
+            type: GraphQLInt,
         },
         sloc003: {
-            type: GraphQLString,
+            type: GraphQLInt,
         },
         sloc004: {
-            type: GraphQLString,
+            type: GraphQLInt,
         }
     },
     resolve: async function (_, args) {

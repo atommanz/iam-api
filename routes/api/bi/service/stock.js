@@ -145,16 +145,16 @@ const caseZBO = async (articleNo, date) => {
     console.log('ZBO1useMat', ZBO1useMat)
     const componentStock = await getComponentStock(ZBO1useMat, date)
 
-    fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
+    // fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
 
     const totalDivideQty = await findTotalStockByQty(ZBO1useMat, componentStock)
-    fs.writeFileSync("totalDivideQty.json", JSON.stringify(totalDivideQty))
+    // fs.writeFileSync("totalDivideQty.json", JSON.stringify(totalDivideQty))
 
     const VarBeforeFindMinQty = await buildVarBeforeFindMinQty(ZBO1useMat, totalDivideQty)
-    fs.writeFileSync("VarBeforeFindMinQty.json", JSON.stringify(VarBeforeFindMinQty))
+    // fs.writeFileSync("VarBeforeFindMinQty.json", JSON.stringify(VarBeforeFindMinQty))
 
     const listMinStock = await findMin(VarBeforeFindMinQty)
-    fs.writeFileSync("listMinStock.json", JSON.stringify(listMinStock))
+    // fs.writeFileSync("listMinStock.json", JSON.stringify(listMinStock))
 
     return listMinStock
 }
@@ -171,16 +171,16 @@ const caseZNM1 = async (articleNo, date) => {
 
     const componentStock = await getComponentStock(ZBO1useMat, date)
 
-    fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
+    // fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
 
     const totalDivideQty = await findTotalStockByQty(ZBO1useMat, componentStock)
-    fs.writeFileSync("totalDivideQty.json", JSON.stringify(totalDivideQty))
+    // fs.writeFileSync("totalDivideQty.json", JSON.stringify(totalDivideQty))
 
     const VarBeforeFindMinQty = await buildVarBeforeFindMinQty(ZBO1useMat, totalDivideQty)
-    fs.writeFileSync("VarBeforeFindMinQty.json", JSON.stringify(VarBeforeFindMinQty))
+    // fs.writeFileSync("VarBeforeFindMinQty.json", JSON.stringify(VarBeforeFindMinQty))
 
     const listMinStock = await findMin(VarBeforeFindMinQty)
-    fs.writeFileSync("listMinStock.json", JSON.stringify(listMinStock))
+    // fs.writeFileSync("listMinStock.json", JSON.stringify(listMinStock))
 
     return listMinStock
 }
@@ -283,15 +283,7 @@ function searchByPlant(nameKey, myArray) {
 
 
 const mainStock = async (aritcleNo, date) => {
-    if (fs.existsSync('componentStock.json')) {
-        fs.unlinkSync('componentStock.json')
-    }
-    if (fs.existsSync('totalDivideQty.json')) {
-        fs.unlinkSync('totalDivideQty.json')
-    }
-    if (fs.existsSync('VarBeforeFindMinQty.json')) {
-        fs.unlinkSync('VarBeforeFindMinQty.json')
-    }
+   
 
 
     const articleType = await getArticleType(aritcleNo)
