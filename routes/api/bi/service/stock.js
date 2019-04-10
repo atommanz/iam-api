@@ -6,8 +6,8 @@ import { POINT_CONVERSION_COMPRESSED, WSAESOCKTNOSUPPORT } from 'constants';
 // import { pool } from '../../../../utils'
 const branchList = config.branch
 const slocKeyList = config.slocKey
-const outputTemplate = config.outputStockTemplate
-
+let outputTemplate = JSON.parse(JSON.stringify(config.outputStockTemplate));
+// const outputTemplate = [...config.outputStockTemplate]
 const outputCaseElse = config.outputStockCaseElse
 const getListArticleIAM = async () => {
     const query = 'select * from sap_mara order by article_no ASC LIMIT 2'
@@ -168,7 +168,7 @@ const caseZNM1 = async (articleNo, date) => {
         component_qty: '1',
         netQty: '1'
     })
-
+    console.log('ZBO1useMat', ZBO1useMat)
     const componentStock = await getComponentStock(ZBO1useMat, date)
 
     // fs.writeFileSync("componentStock.json", JSON.stringify(componentStock))
@@ -205,7 +205,9 @@ const findMin = async (inputList) => {
 }
 
 const buildVarBeforeFindMinQty = async (ZBO1useMat, totalDivideQty) => {
-    const listOut = outputTemplate
+    // let listOut =  [...outputTemplate]
+
+    let listOut = JSON.parse(JSON.stringify(outputTemplate));
     const objOut = {}
     const promMap = ZBO1useMat.map(async (value1, index1) => {
 
@@ -283,11 +285,14 @@ function searchByPlant(nameKey, myArray) {
 
 
 const mainStock = async (aritcleNo, date) => {
-   
+
 
 
     const articleType = await getArticleType(aritcleNo)
-    console.log('articleType', articleType)
+    console.log('outputTemplate', outputTemplate)
+    console.log('config.outputStockTemplate', config.outputStockTemplate)
+
+    console.log('articleType', articleType, aritcleNo, date)
     if (articleType === 'ZBO2') {
         const output = await caseZBO(aritcleNo, date)
         return output
