@@ -1,5 +1,25 @@
-FROM node:carbon
-MAINTAINER Potsawat Chaliewkumnuan <potsawat.ch@indexlivingmall.com>
+FROM node:8
+MAINTAINER Poomiphat Chamweha <poomiphat.ch@indexlivingmall.com>
+
+# last directory must be "nwrfcsdk"
+ENV SAPNWRFC_HOME /sap/nwrfcsdk
+ENV LD_LIBRARY_PATH  /sap/nwrfcsdk/lib
+# ENV NODE_ENV production
+# ENV PORT 3000
+
+WORKDIR $SAPNWRFC_HOME
+# download files manually on host, docker build copies them into image
+COPY ext-lib/nwrfcsdk .
+
+# extract SAR archive, run ldconfig
+# RUN chmod +x SAPCAR_914-80000938.EXE && \
+#     cd .. && \
+#     ./nwrfcsdk/SAPCAR_914-80000938.EXE -xvf ./nwrfcsdk/NWRFC_44-20004568.SAR && \
+#     rm nwrfcsdk/NWRFC_44-20004568.SAR nwrfcsdk/SAPCAR_914-80000938.EXE && \
+#     echo "$SAPNWRFC_HOME/lib" > /etc/ld.so.conf.d/saprfc.conf && \
+#     ldconfig
+RUN echo "$SAPNWRFC_HOME/lib" > /etc/ld.so.conf.d/saprfc.conf && \
+    ldconfig -p
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -16,5 +36,4 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3001
-CMD ["npm", "start"]
+USER node
