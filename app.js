@@ -18,7 +18,7 @@ pool.connect((err) => {
     // const outtt =  callBapi_MD_STOCK_REQUIREMENTS_LIST_API('110000539', '1100')
 })
 app.use('/api', apiRouter)
-var server = app.listen(3000, function () {
+var server = app.listen(3001, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('App is running.')
