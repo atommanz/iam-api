@@ -6,8 +6,9 @@ import { POINT_CONVERSION_COMPRESSED, WSAESOCKTNOSUPPORT } from 'constants';
 // import { pool } from '../../../../utils'
 const branchList = config.branch
 const slocKeyList = config.slocKey
-const outputTemplate = config.outputStock
+const outputTemplate = config.outputStockTemplate
 
+const outputCaseElse = config.outputStockCaseElse
 const getListArticleIAM = async () => {
     const query = 'select * from sap_mara order by article_no ASC LIMIT 2'
     const listArticle = await sequelizePostgres.query(query, { type: sequelizePostgres.QueryTypes.SELECT })
@@ -308,8 +309,8 @@ const mainStock = async (aritcleNo, date) => {
         return output
     }
     else {
-        const output = []
-        return output
+        console.log('ar type', articleType)
+        return outputCaseElse
     }
 
 }
