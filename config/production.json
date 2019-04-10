@@ -1,21 +1,21 @@
 {
-  "queue": {
+  "bi": {
     "PORT": "3000",
     "AD_URL": "ldap://10.0.5.40",
     "AD_BASE": "ou=indexlivingmall,dc=indexlivingmall,dc=com",
     "AD_USERNAME": "LDAP",
     "AD_PASSWORD": "1234567",
-    "DB_HOST": "10.0.5.61",
+    "DB_HOST": "10.10.3.60",
     "DB_USER": "sa",
-    "DB_PASSWORD": "1Nd3x00",
-    "DB_DATABASE": "qsystem",
-    "SAP_USER": "webapp",
-    "SAP_PASSWORD": "init",
+    "DB_PASSWORD": "P@ssw0rd",
+    "DB_DATABASE": "PRD_ILMDW_SYBASE",
+    "SAP_USER": "ca05",
+    "SAP_PASSWORD": "init1234",
     "SAP_CLIENT": "900",
-    "SAP_SYSNR": "20",
-    "SAP_ASHOST": "10.10.5.14",
+    "SAP_SYSNR": "10",
+    "SAP_ASHOST": "erpqas.indexlivingmall.com",
     "SAP_ROUTER": "",
-    "SAP_LANGUAGE": "TH"
+    "SAP_LANGUAGE": "EN"
   },
   "sap-dev": {
     "user": "support",
@@ -25,5 +25,11 @@
     "ashost": "erpdev.indexlivingmall.com",
     "router": "",
     "language": "EN"
+  },
+  "pg": {
+    "host": "10.10.6.121",
+    "username": "biuser",
+    "password": "biuser",
+    "database": "iamg2db"
   }
 }
