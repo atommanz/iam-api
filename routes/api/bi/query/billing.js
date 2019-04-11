@@ -60,17 +60,19 @@ const getSumBilling = {
                 // console.log('24 in', amount, value.NET_SALES_PRICE, quantity)
                 quantity = quantity + parseInt(value.NET_SALES_QTY)
                 amount = amount + parseFloat(value.NET_SALES_PRICE)
+                cost = cost + parseFloat(value.COGS_VAL)
             }
             else if (value.DIST_CH_KEY === '10') {
                 // console.log('ch 10', amount, quantity)
                 quantity = quantity + parseInt(value.NET_SALES_QTY)
                 amount = amount + Math.round(value.NET_SALES_PRICE * 100) / 100
+                cost = cost +parseFloat(value.COGS_VAL)
             }
             // console.log('dd', objOut.amount)
             objOut.ITEM_KEY = String(value.ITEM_KEY)
             objOut.quantity = String(quantity)
             objOut.amount = String(Math.round(amount * 100) / 100)
-            objOut.cost = String(cost)
+            objOut.cost = String(Math.round(cost * 100) / 100)
         })
         await Promise.all(promMap)
         await arr.push(objOut)
