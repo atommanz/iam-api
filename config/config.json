@@ -171,13 +171,13 @@
     },
     {
       "plant": "1101",
-      "sloc001": 0,
-      "sloc003": 0,
-      "sloc002": 0,
-      "sloc004": 0
+      "sloc001": [],
+      "sloc003": [],
+      "sloc002": [],
+      "sloc004": []
     }
   ],
-  "outputStockCaseElse": [
+  "outputStockCaseElse":[
     {
       "plant": "1201",
       "sloc001": 0,
@@ -278,44 +278,44 @@
     },
     {
       "plant": "1216",
-      "sloc004": 0,
-      "sloc001": 0,
-      "sloc002": 0,
-      "sloc003": 0
-    },
-    {
-      "plant": "1217",
       "sloc002": 0,
       "sloc001": 0,
       "sloc003": 0,
       "sloc004": 0
     },
     {
-      "plant": "1221",
+      "plant": "1217",
       "sloc003": 0,
       "sloc001": 0,
       "sloc002": 0,
+      "sloc004": 0
+    },
+    {
+      "plant": "1221",
+      "sloc001": 0,
+      "sloc002": 0,
+      "sloc003": 0,
       "sloc004": 0
     },
     {
       "plant": "1223",
       "sloc001": 0,
-      "sloc002": 0,
       "sloc003": 0,
+      "sloc002": 0,
       "sloc004": 0
     },
     {
       "plant": "1224",
+      "sloc002": 0,
       "sloc001": 0,
       "sloc003": 0,
-      "sloc002": 0,
       "sloc004": 0
     },
     {
       "plant": "1100",
-      "sloc002": 0,
       "sloc001": 0,
       "sloc003": 0,
+      "sloc002": 0,
       "sloc004": 0
     },
     {
