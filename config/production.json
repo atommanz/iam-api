@@ -22,9 +22,9 @@
     "passwd": "init",
     "client": "900",
     "sysnr": "20",
-    "ashost": "sapci.indexlivingmall.com",
+    "ashost": "10.10.5.14",
     "router": "",
-    "language": "EN"
+    "language": "TH"
   },
   "pg": {
     "host": "10.10.6.121",
