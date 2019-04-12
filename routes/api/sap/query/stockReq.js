@@ -23,6 +23,7 @@ const getStockReqList = {
     resolve: async function (_, args) {
         const newList = []
         const outBapi = await callBapi_MD_STOCK_REQUIREMENTS_LIST_API(args.articleNo, args.siteCode)
+        console.log(outBapi)
         if (outBapi.lenth === 0) {
             newList.push({
                 DELKZ: "",
