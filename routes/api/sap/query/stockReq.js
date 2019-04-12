@@ -42,14 +42,14 @@ const getStockReqList = {
             })
             await Promise.all(promMap)
 
-            if (newList.length === 0) {
-                newList.push({
-                    DELKZ: "",
-                    DAT01: "",
-                    EXTRA: "",
-                    MNG01: ""
-                })
-            }
+            // if (newList.length === 0) {
+            //     newList.push({
+            //         DELKZ: "",
+            //         DAT01: "",
+            //         EXTRA: "",
+            //         MNG01: ""
+            //     })
+            // }
             return newList
         }
 
