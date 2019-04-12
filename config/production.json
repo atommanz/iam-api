@@ -18,11 +18,11 @@
     "SAP_LANGUAGE": "EN"
   },
   "sap-dev": {
-    "user": "support",
-    "passwd": "it@7ndex",
+    "user": "webapp",
+    "passwd": "init",
     "client": "900",
-    "sysnr": "00",
-    "ashost": "erpdev.indexlivingmall.com",
+    "sysnr": "20",
+    "ashost": "sapci.indexlivingmall.com",
     "router": "",
     "language": "EN"
   },
