@@ -22,7 +22,7 @@
     "passwd": "init",
     "client": "900",
     "sysnr": "20",
-    "ashost": "10.10.5.14",
+    "ashost": "erpprd.indexlivingmall.com",
     "router": "",
     "language": "TH"
   },
