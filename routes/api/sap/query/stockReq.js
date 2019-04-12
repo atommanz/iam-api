@@ -23,13 +23,22 @@ const getStockReqList = {
     resolve: async function (_, args) {
         const newList = []
         const outBapi = await callBapi_MD_STOCK_REQUIREMENTS_LIST_API(args.articleNo, args.siteCode)
-        const promMap = outBapi.map((value,index)=>{
-            if(value.DELKZ === 'LA' || value.DELKZ ==='BE'){
+        if (outBapi.lenth === 0) {
+            newList.push({
+                DELKZ: "",
+                DAT01: "",
+                EXTRA: "",
+                MNG01: ""
+            })
+        }
+
+        const promMap = outBapi.map((value, index) => {
+            if (value.DELKZ === 'LA' || value.DELKZ === 'BE') {
                 newList.push(value)
             }
         })
         await Promise.all(promMap)
-        
+
         return newList
 
     }
