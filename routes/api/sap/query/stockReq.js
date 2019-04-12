@@ -34,17 +34,25 @@ const getStockReqList = {
             return newList
         }
 
-        else{
+        else {
             const promMap = outBapi.map((value, index) => {
                 if (value.DELKZ === 'LA' || value.DELKZ === 'BE') {
                     newList.push(value)
                 }
             })
             await Promise.all(promMap)
-    
+
+            if (newList.length === 0) {
+                newList.push({
+                    DELKZ: "",
+                    DAT01: "",
+                    EXTRA: "",
+                    MNG01: ""
+                })
+            }
             return newList
         }
-        
+
 
     }
 }
