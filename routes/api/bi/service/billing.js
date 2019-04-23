@@ -14,7 +14,7 @@ const serviceGetBillingList = async (articleNo, startDate, endDate) => {
   ,[MCH3_CD]
   ,[NET_SALES_QTY]
   ,[CURRENCY_CD]
-  ,[NET_SALES_PRICE]
+  ,[TOT_SALES_VAL]
   ,[COGS_VAL]
 FROM [PRD_ILMDW_SYBASE].[dbo].[FCT_SVE_BLS_PERFORMANCE_DAILY] 
 where ITEM_KEY = '${NewarticleNo}' and DATE_KEY between '${NewstartDate}' and '${NewendDate}'`

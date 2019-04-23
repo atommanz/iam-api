@@ -66,15 +66,15 @@ const getSumBilling = {
             const promMap = outSQLbilling.map((value, index) => {
                 // console.log(value)
                 if (value.MCH3_CD === '24' && (value.DIST_CH_KEY === '10' || value.DIST_CH_KEY === '16')) {
-                    // console.log('24 in', amount, value.NET_SALES_PRICE, quantity)
+                    // console.log('24 in', amount, value.TOT_SALES_VAL, quantity)
                     quantity = quantity + parseInt(value.NET_SALES_QTY)
-                    amount = amount + parseFloat(value.NET_SALES_PRICE)
+                    amount = amount + parseFloat(value.TOT_SALES_VAL)
                     cost = cost + parseFloat(value.COGS_VAL)
                 }
                 else if (value.DIST_CH_KEY === '10') {
                     // console.log('ch 10', amount, quantity)
                     quantity = quantity + parseInt(value.NET_SALES_QTY)
-                    amount = amount + Math.round(value.NET_SALES_PRICE * 100) / 100
+                    amount = amount + Math.round(value.TOT_SALES_VAL * 100) / 100
                     cost = cost + parseFloat(value.COGS_VAL)
                 }
                 // console.log('dd', objOut.amount)

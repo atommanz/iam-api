@@ -36,7 +36,7 @@ const billingType = new GraphQLObjectType({
             type: GraphQLString,
             description: "currency",
         },
-        NET_SALES_PRICE: {
+        TOT_SALES_VAL: {
             type: GraphQLString,
             description: "slae price",
         }

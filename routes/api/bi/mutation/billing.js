@@ -35,7 +35,7 @@ const addProduct = {
         CURRENCY_CD: {
             type: GraphQLString,
         },
-        NET_SALES_PRICE: {
+        TOT_SALES_VAL: {
             type: GraphQLString,
         }
     },
