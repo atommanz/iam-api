@@ -21,7 +21,7 @@ where bk.article_no like '${articleNo}'
 limit 500`
     const deliveryType = await sequelizePostgres.query(query, { type: sequelizePostgres.QueryTypes.SELECT })
     // console.log(deliveryType)
-    return deliveryType
+    return deliveryType[0]
 }
 
 export default {
