@@ -71,6 +71,9 @@ const getStockReqList = {
             const promMap = siteList.map(async (v) => {
                 // console.log(v)
                 const outBapi = await callBapi_MD_STOCK_REQUIREMENTS_LIST_API(args.articleNo, v)
+                if(v === '1225'){
+                    console.log(outBapi)
+                }
                 // console.log(outBapi)
                 if (outBapi.lenth === 0) {
                     newList.push({
@@ -87,7 +90,7 @@ const getStockReqList = {
             await Promise.all(promMap)
             // console.log('newList', newList)
             const newListFilter = newList.filter((value, index) => {
-                // console.log(value.DELKZ)
+                console.log(value.DELKZ)
                 return (value.DELKZ === 'LA' || value.DELKZ === 'BE')
             })
             if (newListFilter.length === 0) {

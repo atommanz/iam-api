@@ -1,7 +1,7 @@
 import { invokeRFC } from '../../../../rfc'
 
 export const callBapi_MD_STOCK_REQUIREMENTS_LIST_API = (articleNo, siteCode) => new Promise(async (resolve, reject) => {
-  console.log('in bapi MD_STOCK_REQUIREMENTS_LIST_API ', articleNo, siteCode)
+  // console.log('in bapi MD_STOCK_REQUIREMENTS_LIST_API ', articleNo, siteCode)
   const inp = {
     MATNR: articleNo.padStart(18, '0') ,
     WERKS: (siteCode ? siteCode : '1100'),
