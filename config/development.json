@@ -18,13 +18,11 @@
     "SAP_LANGUAGE": "EN"
   },
    "sap-dev": {
-    "user": "webapp",
-    "passwd": "init",
-    "client": "900",
-    "sysnr": "20",
-    "ashost": "erpprd.indexlivingmall.com",
-    "router": "",
-    "language": "TH"
+    "user": "support",
+    "passwd": "it@7ndex",
+    "sysnr": "00",
+    "ashost": "erpdev.indexlivingmall.com",
+    "language": "EN"
   },
   "pg": {
     "host": "10.10.6.121",
