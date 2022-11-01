@@ -13,7 +13,7 @@
     "url": "git://github.com/atommanz/iam-api.git"
   },
   "dependencies": {
-    "babel": "^5.8.23",
+    "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
